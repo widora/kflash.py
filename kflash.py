@@ -597,6 +597,10 @@ class KFlash:
                     # This is for CH340, contained dan, bit and kd233
                     baudrate_stage0 = int(baudrate * 38.4 / 38)
                     # CH340 can not use this method, test failed, take risks at your own risk
+                elif args.Board == "airv":
+                    KFlash.log(INFO_MSG,"CP210x mode", BASH_TIPS['DEFAULT'])
+                    # This is for CP210x, contained airv,bps=1.5M,2M,3M
+                    baudrate_stage0 = int(baudrate)
                 else:
                     # This is for unknown board
                     KFlash.log(WARN_MSG,"Unknown mode", BASH_TIPS['DEFAULT'])
@@ -1106,7 +1110,7 @@ class KFlash:
             serial.tools.miniterm.main(default_port=_port, default_baudrate=115200, default_dtr=control_signal_b, default_rts=control_signal_b)
             sys.exit(0)
 
-        boards_choices = ["kd233", "dan", "bit", "bit_mic", "goE", "goD", "maixduino", "trainer"]
+        boards_choices = ["kd233", "dan", "bit", "bit_mic", "goE", "goD", "maixduino", "trainer", "airv"]
         if terminal:
             parser = argparse.ArgumentParser()
             parser.add_argument("-p", "--port", help="COM Port", default="DEFAULT")
@@ -1240,7 +1244,7 @@ class KFlash:
                     err = (ERROR_MSG,"No vaild Kendryte K210 found in Auto Detect, Check Your Connection or Specify One by"+BASH_TIPS['GREEN']+'`-p '+('/dev/ttyUSB0', 'COM3')[sys.platform == 'win32']+'`',BASH_TIPS['DEFAULT'])
                     err = tuple2str(err)
                     raise_exception( Exception(err) )
-                if args.Board == "dan" or args.Board == "bit" or args.Board == "trainer":
+                if args.Board == "dan" or args.Board == "bit" or args.Board == "trainer" or args.Board == "airv":
                     try:
                         KFlash.log('.', end='')
                         self.loader.reset_to_isp_dan()
@@ -1406,7 +1410,7 @@ class KFlash:
                 self.loader.flash_firmware(firmware_bin.read())
 
         # 3. boot
-        if args.Board == "dan" or args.Board == "bit" or args.Board == "trainer":
+        if args.Board == "dan" or args.Board == "bit" or args.Board == "trainer" or args.Board == "airv":
             self.loader.reset_to_boot_dan()
         elif args.Board == "kd233":
             self.loader.reset_to_boot_kd233()
