@@ -29,24 +29,9 @@ Usage
     -n, --noansi          Do not use ANSI colors, recommended in Windows CMD
     -s, --sram            Download firmware to SRAM and boot
     -B BOARD, --Board BOARD
-                            Select dev board, e.g. kd233, dan, bit, goD, goE or
-                            trainer
+                            Select dev board, e.g. kd233, dan, bit, goD, goE, trainer or airv
     -S SLOW, --Slow SLOW  Slow download mode
 
-Attention
----------
-
-Maixgo with openec firmware, BOARD must choose ``-B goE``, and should choose
-sencond com port.
-
-With cmsis-dap firmware(before 2019.02.21), BOARD must use ``-B goD``.
-
-You can update `new cmsis-dap firmware <http://blog.sipeed.com/p/352.html>`__, it is same as openec.
-
-For K210 Trainer V0.01b, BOARD must choose ``-B trainer``.
-
-For KD233, BOARD must choose ``-B kd233``, and the jumper for kd233 automatic
-download circuit must be set.
 
 Installation
 ------------
@@ -78,29 +63,29 @@ Sample Usage
 
     # Linux or macOS
     # Using pip
-    kflash -B dan firmware.bin
-    kflash -B dan -t firmware.bin # Open a Serial Terminal After Finish
+    kflash -B airv firmware.bin
+    kflash -B airv -t firmware.bin # Open a Serial Terminal After Finish
     # Using source code
-    python3 kflash.py -B dan firmware.bin
-    python3 kflash.py -B dan -t firmware.bin # Open a Serial Terminal After Finish
+    python3 kflash.py -B airv firmware.bin
+    python3 kflash.py -B airv -t firmware.bin # Open a Serial Terminal After Finish
 
     # Windows CMD or PowerShell
     # Using pip
-    kflash -B dan firmware.bin
-    kflash -B dan -t firmware.bin # Open a Serial Terminal After Finish
-    kflash -B dan -n -t firmware.bin # Open a Serial Terminal After Finish, do not use ANSI colors
+    kflash -B airv firmware.bin
+    kflash -B airv -t firmware.bin # Open a Serial Terminal After Finish
+    kflash -B airv -n -t firmware.bin # Open a Serial Terminal After Finish, do not use ANSI colors
     # Using source code
-    python kflash.py -B dan firmware.bin
-    python kflash.py -B dan -t firmware.bin # Open a Serial Terminal After Finish
-    python kflash.py -B dan -n -t firmware.bin # Open a Serial Terminal After Finish, do not use ANSI colors
+    python kflash.py -B airv firmware.bin
+    python kflash.py -B airv -t firmware.bin # Open a Serial Terminal After Finish
+    python kflash.py -B airv -n -t firmware.bin # Open a Serial Terminal After Finish, do not use ANSI colors
 
     # Windows Subsystem for Linux
     # Using pip
-    sudo kflash -B dan -p /dev/ttyS13 firmware.bin # ttyS13 Stands for the COM13 in Device Manager
-    sudo kflash -B dan -p /dev/ttyS13 -t firmware.bin # Open a Serial Terminal After Finish
+    sudo kflash -B airv -p /dev/ttyS13 firmware.bin # ttyS13 Stands for the COM13 in Device Manager
+    sudo kflash -B airv -p /dev/ttyS13 -t firmware.bin # Open a Serial Terminal After Finish
     # Using source code
-    sudo python3 kflash.py -B dan -p /dev/ttyS13 firmware.bin # ttyS13 Stands for the COM13 in Device Manager
-    sudo python3 kflash.py -B dan -p /dev/ttyS13 -t firmware.bin # Open a Serial Terminal After Finish
+    sudo python3 kflash.py -B airv -p /dev/ttyS13 firmware.bin # ttyS13 Stands for the COM13 in Device Manager
+    sudo python3 kflash.py -B airv -p /dev/ttyS13 -t firmware.bin # Open a Serial Terminal After Finish
 
 For fast programming,
 
@@ -119,8 +104,8 @@ For fast programming,
     python3 kflash.py -b 4500000 -B goE firmware.bin
     # Trainer could use 8000000 baudrate!
     python3 kflash.py -b 8000000 -B trainer firmware.bin
-    # Dan could use 3000000 baudrate!
-    python3 kflash.py -b 3000000 -B dan firmware.bin
+    # airv1 could use 3000000 baudrate!
+    python3 kflash.py -b 3000000 -B airv firmware.bin
 
 Execute user code directly in SRAM and view in serial terminal,
 
@@ -309,7 +294,7 @@ macOS
 
 .. code:: bash
 
-    $ ls /dev/ttyUSB*
+    $ ls /dev/cu*
     /dev/cu.wchusbserial1410
     /dev/cu.wchusbserial1437
     /dev/cu.SLAB_USBtoUART2333
@@ -326,5 +311,3 @@ macOS
 
 You may unable to find the device even in the /dev, check the link below for
 drivers
-
--  For K210 and Sipeed Dan -> `WCH CH34x USB2UART Chip <https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver>`__
