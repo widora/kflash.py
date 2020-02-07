@@ -44,7 +44,7 @@ class KFlash:
         INFO_MSG    = BASH_TIPS['GREEN']+BASH_TIPS['BOLD']+'[INFO]'+BASH_TIPS['NORMAL']
 
         VID_LIST_FOR_AUTO_LOOKUP = "(1A86)|(0403)|(067B)|(10C4)|(C251)|(0403)"
-        #                            WCH    FTDI    PL     CL    DAP   OPENEC
+        #                            WCH    FTDI    PL     CP    DAP   OPENEC
         ISP_RECEIVE_TIMEOUT = 0.5
 
         MAX_RETRY_TIMES = 10
